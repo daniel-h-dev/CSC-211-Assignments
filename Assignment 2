@@ -1,0 +1,48 @@
+import java.util.Arrays;
+
+public class Bank {
+    double amount;
+
+    double[] transactions;
+
+    int transactionCount;
+
+    public void deposit(double depAmount){
+        amount += depAmount;
+        transactions[transactionCount] = depAmount;
+        transactionCount++;
+        transactions = Arrays.copyOf(transactions, transactionCount + 1);
+    }
+
+    public void withdraw(double witAmount){
+        amount -= witAmount;
+        transactions[transactionCount] = -1 * witAmount;
+        transactionCount++;
+        transactions = Arrays.copyOf(transactions, transactionCount + 1);
+    }
+
+    public void listInteractions(){
+        System.out.println("Transactions(+ for deposits/- for withdrawals): ");
+        for (double transaction : transactions) {
+            if (transaction != 0) {
+                System.out.println(transaction);
+            }
+        }
+    }
+
+    public Bank(){
+        amount = 0;
+        transactionCount = 0;
+        transactions = new double[] {0};
+    }
+    
+    public static void main(String[] args){
+        Bank bank = new Bank();
+        bank.deposit(200.0);
+        bank.deposit(150.0);
+        bank.withdraw(20.0);
+        bank.listInteractions();
+        System.out.println("Account balance: ");
+        System.out.println(bank.amount);
+    }
+}
