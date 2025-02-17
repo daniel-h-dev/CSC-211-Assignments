@@ -1,0 +1,166 @@
+public class Automobile {
+    int year;
+    String make;
+    String model;
+    int speed;
+
+    public void honk(){
+        System.out.println("Beep Beep");
+    }
+
+    Automobile(){
+        year = 0;
+        model = "Unspecified";
+        make = "Unspecified";
+        speed = 0;
+    }
+
+    Automobile(int inputYear, String inputMake, String inputModel){
+        year = inputYear;
+        model = inputModel;
+        make = inputMake;
+        speed = 0;
+    }
+
+    public boolean equals(Object obj){
+        if (obj == null) {
+            return false;
+        }
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Automobile)) {
+            return false;
+        }
+        Automobile other = (Automobile) obj;
+        return ((this.year == other.year) && (this.model.equals(other.model)) && (this.make.equals(other.make)));
+    }
+
+    public String toString(){
+        return ("Automobile - Make: " + make + ", Model: " + model + ", Year: " + year + ", Speed: " + speed + " mph");
+    }
+
+    public int compareTo(Automobile a){
+        if (speed > a.speed){
+            return 1;
+        }
+        else if (speed < a.speed){
+            return -1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    public void accelerate(int accelSpeed){
+        speed += accelSpeed;
+    }
+
+    public void stop(){
+        speed = 0;
+    }
+
+    public void reverse(int reverseSpeed){
+        speed = reverseSpeed * -1;
+    }
+}
+
+
+class Car extends Automobile {
+    Car() {
+        super();
+    }
+
+    Car(int inputYear, String inputModel, String inputMake) {
+        super(inputYear, inputModel, inputMake);
+    }
+
+    @Override
+    public void honk() {
+        System.out.println("Beep Beep Beep");
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Car)) {
+            return false;
+        }
+        Car other = (Car) obj;
+        return ((this.year == other.year) && (this.model.equals(other.model)) && (this.make.equals(other.make)));
+    }
+
+    @Override
+    public String toString() {
+        return ("Car - Make: " + make + ", Model: " + model + ", Year: " + year + ", Speed: " + speed + " mph");
+    }
+}
+
+
+class SportsCar extends Automobile{
+    SportsCar(){
+        super();
+    }
+    SportsCar(int inputYear, String inputModel, String inputMake){
+        super(inputYear, inputModel, inputMake);
+    }
+    @Override
+    public void honk() {
+        System.out.println("Beep Beep Beep Beep");
+    }
+    @Override
+    public boolean equals(Object obj){
+        if (obj == null) {
+            return false;
+        }
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof SportsCar)) {
+            return false;
+        }
+        SportsCar other = (SportsCar) obj;
+        return ((this.year == other.year) && (this.model.equals(other.model)) && (this.make.equals(other.make)));
+    }
+    @Override
+    public String toString(){
+        return ("Sports Car - Make: " + make + ", Model: " + model + ", Year: " + year + ", Speed: " + speed + " mph");
+    }
+}
+
+
+class JunkCar extends Automobile{
+    JunkCar(){
+        super();
+    }
+    JunkCar(int inputYear, String inputModel, String inputMake){
+        super(inputYear, inputModel, inputMake);
+    }
+    @Override
+    public void honk() {
+        System.out.println("This horn does not work");
+    }
+    @Override
+    public boolean equals(Object obj){
+        if (obj == null) {
+            return false;
+        }
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof JunkCar)) {
+            return false;
+        }
+        JunkCar other = (JunkCar) obj;
+        return ((this.year == other.year) && (this.model.equals(other.model)) && (this.make.equals(other.make)));
+    }
+    @Override
+    public String toString(){
+        return ("Junk Car - Make: " + make + ", Model: " + model + ", Year: " + year + ", Speed: " + speed + " mph");
+    }
+}
