@@ -1,0 +1,25 @@
+public class Tester {
+    public static void main(String args[]){
+        Automobile automobile = new Automobile();
+        Car car = new Car(2014, "Toyota", "Camry");
+        Car dupCar = new Car(2014, "Toyota", "Camry");
+        SportsCar sportsCar = new SportsCar(2025, "Porsche", "911");
+        JunkCar junkCar = new JunkCar(1983, "Nissan", "Altima");
+
+        Automobile[] myArray = {automobile, car, sportsCar, junkCar};
+
+        for (Automobile a : myArray){
+            a.honk();
+            a.accelerate((int)(Math.random() * 100));
+            System.out.println(a);
+            a.stop();
+            System.out.println(a);
+            System.out.println();
+        }
+
+        System.out.println(car.equals(dupCar));
+        System.out.println(sportsCar.equals(junkCar));
+
+
+    }
+}
