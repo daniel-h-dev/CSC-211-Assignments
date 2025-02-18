@@ -1,0 +1,64 @@
+public class Main {
+
+    static class Shape{
+        int sides;
+
+        Shape(){
+            sides = -1;
+        }
+
+        Shape(int input){
+            sides = input;
+        }
+
+        void setSides(int newSides){
+            sides = newSides;
+        }
+
+        int getSides(){
+            return sides;
+        }
+    }
+
+    static class Circle extends Shape{
+        double radius;
+
+        Circle(){
+            super(0);
+        }
+
+        Circle(double radiusInput){
+            super(0);
+            radius = radiusInput;
+        }
+    }
+
+    static class Rectangle extends Shape{
+        double length;
+        double width;
+
+        Rectangle(){
+            super(4);
+        }
+
+        Rectangle(double lengthInput, double widthInput){
+            super(4);
+            length = lengthInput;
+            width = widthInput;
+        }
+    }
+
+    public static void main(String[] args){
+        Circle circle = new Circle(2);
+        Rectangle rectangle = new Rectangle(4,5);
+
+        System.out.println(circle.getSides());
+        System.out.println(rectangle.getSides());
+
+        circle.setSides(1);
+        rectangle.setSides(6);
+
+        System.out.println(circle.getSides());
+        System.out.println(rectangle.getSides());
+    }
+}
