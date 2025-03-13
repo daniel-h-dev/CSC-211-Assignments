@@ -1,0 +1,60 @@
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class EmployeeForm {
+    public static void main(String[] args) {
+        Frame frame = new Frame("Employee Form");
+        frame.setLayout(new FlowLayout());
+        frame.setSize(300, 500);
+        frame.setVisible(true);
+
+        Label nameLabel = new Label("Enter Employee Name:");
+        nameLabel.setBounds(25, 50, 200, 30);
+        frame.add(nameLabel);
+
+        TextField name = new TextField();
+        name.setBounds(25, 80, 250, 30);
+        frame.add(name);
+
+        Label idLabel = new Label("Enter Employee ID:");
+        idLabel.setBounds(25, 130, 200, 30);
+        frame.add(idLabel);
+
+        TextField id = new TextField();
+        id.setBounds(25, 160, 250, 30);
+        frame.add(id);
+
+        Label deptLabel = new Label("Enter Employee Department:");
+        deptLabel.setBounds(25, 210, 200, 30);
+        frame.add(deptLabel);
+
+        TextField dept = new TextField();
+        dept.setBounds(25, 240, 250, 30);
+        frame.add(dept);
+
+        Button submit = new Button("Submit");
+        submit.setBounds(100, 290, 100, 30);
+        frame.add(submit);
+
+        Label nameOutput = new Label();
+        nameOutput.setBounds(50, 350, 200, 30);
+        Label idOutput = new Label();
+        idOutput.setBounds(50, 375, 200, 30);
+        Label deptOutput = new Label();
+        deptOutput.setBounds(50, 400, 200, 30);
+
+        frame.add(nameOutput);
+        frame.add(idOutput);
+        frame.add(deptOutput);
+
+        submit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                nameOutput.setText("Employee Name: " + name.getText());
+                idOutput.setText("Employee ID: " + id.getText());
+                deptOutput.setText("Employee Department: " + dept.getText());
+
+            }
+        });
+    }
+}
