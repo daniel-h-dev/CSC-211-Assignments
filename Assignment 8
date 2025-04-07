@@ -1,0 +1,45 @@
+import javax.swing.*;
+import java.util.Scanner;
+
+/**
+ This program demonstrates the PassFailExam class.
+ */
+
+public class PassFailExamDemo
+{
+    public static void main(String[] args)
+    {
+        int questions;     // Number of questions
+        int missed;        // Number of questions missed
+        double minPassing; // Minimum passing score
+
+        String input;
+
+        // Create a Scanner object for keyboard input.
+        Scanner keyboard = new Scanner(System.in);
+
+        // Get the number of questions on the exam.
+
+        input = JOptionPane.showInputDialog("How many questions are " +
+                "on the exam? ");
+        questions = Integer.parseInt(input);
+
+         input = JOptionPane.showInputDialog("How many questions did " +
+                "the student miss? ");
+        missed = Integer.parseInt(input);
+
+        input = JOptionPane.showInputDialog("What is the minimum " +
+                "passing score? ");
+        minPassing = Integer.parseInt(input);
+
+
+        JOptionPane.showMessageDialog(null,
+                "There are " + questions + " questions on the " +
+                "exam. The student missed " + missed + " questions. The minimum passing score is "
+                + minPassing + ".");
+
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
