@@ -1,0 +1,20 @@
+// Main.java
+public class Main {
+    public static void main(String[] args) {
+        Animal myDog = new Dog("Buddy");
+        Animal myCat = new Cat("Whiskers");
+
+
+        myDog.describe();
+        myDog.speak();
+
+        System.out.println();
+
+        myCat.describe();
+        myCat.speak();
+
+        // Inheritance: Dog and Cat classes inherit from Animal class
+        // Polymorphism: the speak() method is overridden differently in the Dog and Cat classes
+        // Composition: the Sound class is a field of the Animal class
+    }
+}
