@@ -1,0 +1,60 @@
+interface Playable {
+    void play();
+    void pause();
+    void stop();
+}
+
+class Video implements Playable {
+    public void play() {
+        System.out.println("Playing video");
+    }
+    public void pause() {
+        System.out.println("Pausing video");
+    }
+    public void stop() {
+        System.out.println("Stopping video");
+    }
+}
+
+abstract class Vehicle {
+    int speed;
+
+    abstract void start();
+    abstract void stop();
+
+    void displaySpeed() {
+        System.out.println("Speed: " + speed + " mph");
+    }
+}
+
+class Boat extends Vehicle {
+    Boat(int speed) {
+        this.speed = speed;
+    }
+
+    public void start() {
+        System.out.println("Starting boat");
+    }
+    public void stop() {
+        System.out.println("Stopping boat");
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Video video = new Video();
+        video.play();
+        video.pause();
+        video.stop();
+
+        System.out.println();
+        
+        Boat boat = new Boat(10);
+        boat.start();
+        boat.stop();
+        boat.displaySpeed();
+    }
+}
+
+// You would use an interface to define a contract for a behavior. (Video *can be* played)
+// You would use an abstract class to share code among common classes. (Boat *is a* Vehicle)
