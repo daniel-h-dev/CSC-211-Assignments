@@ -1,0 +1,142 @@
+import java.util.*;
+import java.util.function.*;
+import java.util.stream.*;
+
+// Base Product Class
+abstract class Product {
+    protected String name;
+    protected double price;
+
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public abstract String getCategory();
+
+    public String getName() { return name; }
+    public double getPrice() { return price; }
+}
+
+// Subclasses
+class Electronics extends Product {
+    public Electronics(String name, double price) { super(name, price); }
+    public String getCategory() { return "Electronics"; }
+}
+
+class Clothing extends Product {
+    public Clothing(String name, double price) { super(name, price); }
+    public String getCategory() { return "Clothing"; }
+}
+
+class Grocery extends Product {
+    public Grocery(String name, double price) { super(name, price); }
+    public String getCategory() { return "Grocery"; }
+}
+
+// Base User Class
+abstract class User {
+    protected String username;
+
+    public User(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() { return username; }
+}
+
+class Customer extends User {
+    private List<Product> cart = new ArrayList<>();
+
+    public Customer(String username) {
+        super(username);
+    }
+
+    public void addToCart(Product p) {
+        cart.add(p);
+        System.out.println(p.getName() + " added to cart.");
+    }
+
+    public List<Product> getCart() { return cart; }
+
+    public Order checkout() {
+        Order order = new Order(this, new ArrayList<>(cart));
+        cart.clear();
+        return order;
+    }
+}
+
+class Admin extends User {
+    public Admin(String username) {
+        super(username);
+    }
+
+    public void manageProducts() {
+        System.out.println("Admin managing products...");
+    }
+}
+
+// Order Class
+class Order {
+    private Customer customer;
+    private List<Product> items;
+    private double total;
+
+    public Order(Customer customer, List<Product> items) {
+        this.customer = customer;
+        this.items = items;
+        calculateTotal();
+    }
+
+    private void calculateTotal() {
+        double subtotal = items.stream().mapToDouble(Product::getPrice).sum();
+
+        // Apply tax (e.g., 10%) and flat shipping fee ($5) using lambdas
+        Function<Double, Double> applyTax = amt -> amt * 1.10;
+        Function<Double, Double> applyShipping = amt -> amt + 5.0;
+
+        total = applyShipping.apply(applyTax.apply(subtotal));
+    }
+
+    public double getTotal() { return total; }
+    public List<Product> getItems() { return items; }
+
+    public void printOrderSummary() {
+        System.out.println("Order Summary for " + customer.getUsername());
+        items.forEach(p -> System.out.println("- " + p.getName() + ": $" + p.getPrice()));
+        System.out.printf("Total: $%.2f\n", total);
+    }
+}
+
+// Main Class
+public class ECommercePlatform {
+    public static void main(String[] args) {
+        // Sample products
+        List<Product> products = Arrays.asList(
+                new Electronics("Laptop", 999.99),
+                new Clothing("T-Shirt", 19.99),
+                new Grocery("Milk", 2.99),
+                new Electronics("Headphones", 199.99),
+                new Clothing("Jeans", 49.99)
+        );
+
+        // Lambda: Filter products by category
+        Predicate<Product> isClothing = p -> p.getCategory().equals("Clothing");
+        System.out.println("Clothing Products:");
+        products.stream().filter(isClothing).forEach(p -> System.out.println(p.getName()));
+
+        // Lambda: Sort products by price
+        System.out.println("\nProducts sorted by price:");
+        products.stream()
+                .sorted(Comparator.comparingDouble(Product::getPrice))
+                .forEach(p -> System.out.println(p.getName() + ": $" + p.getPrice()));
+
+        // Customer and order flow
+        Customer cust = new Customer("alice");
+        cust.addToCart(products.get(0)); // Laptop
+        cust.addToCart(products.get(2)); // Milk
+
+        Order order = cust.checkout();
+        order.printOrderSummary();
+    }
+}
